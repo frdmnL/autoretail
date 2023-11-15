@@ -17,12 +17,12 @@ public class User
                 shopping.show();//打印商品列表
                 System.out.println("请选择相应编号！");//提示用于选择商品
                 int choose = sc.nextInt();//保存客户输入的商品编号
-                //边界限定
-                while (choose > 5 || choose <= 0) {
+                //边界限定,最多存储十类商品
+                while (choose > 11 || choose <= 0) {
                     System.out.println("没有此商品，请重新选择！");//提示用户输入的编码没有对应的商品
                     choose = sc.nextInt();//再次保存客户输入的编号
                 }
-                if (choose == 5)//如果是“5”退出购物
+                if (choose == 11)//如果是“11”退出购物
                 {
                     System.out.println("欢迎您下次光临！");
                     return;
@@ -41,7 +41,7 @@ public class User
                         System.out.println("没有此商品，请重新选择！");
                         choose = sc.nextInt();
                     }
-                    if (choose == 5) {
+                    if (choose == 11) {
                         System.out.println("欢迎您下次光临！");
                         break;
                     }

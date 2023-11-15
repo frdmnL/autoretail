@@ -59,23 +59,22 @@ public class Database {
         }
     }
 
-    public void updateinfo()
+
+    public void updateinfoall(int Sno,float price,int num)
     {
-        String ginfo = "SELECT *FROM goodsinfo;";
+        String md1 = "update goodsinfo set price=";
+        String upnum = ",num=";
+        String wherez = " where Sno=";
+        String sqlmd1;
         int index = 1;
         try {
             Connection connection = Database.getConnection();
             //执行SQL对象Statement，执行SQL的对象
             Statement statement = connection.createStatement();
 
-            ResultSet resultSet = statement.executeQuery(ginfo);
-            //System.out.println("现还有以下商品供您选择：");
-            while(resultSet.next()){
-                System.out.print(index+"、"+resultSet.getString("name")+"\t价格："+resultSet.getDouble("price")+"\t剩余："+resultSet.getInt("num")+"\n");
-                index++;
-            }
-            //System.out.println("5、退出购物");
-            resultSet.close();
+            sqlmd1 = md1 + price + upnum + num + wherez + Sno;//根据输入修改数据
+            statement.executeUpdate(sqlmd1);
+
             statement.close();
             statement.close();
             connection.close();
@@ -84,4 +83,94 @@ public class Database {
             e.printStackTrace();
         }
     }
+
+    public void updateinfonum(int Sno,int num)
+    {
+
+        String md2 = "update goodsinfo set num=";
+        String wherez = " where Sno=";
+        String sqlmd2;
+        int index = 1;
+        try {
+            Connection connection = Database.getConnection();
+            //执行SQL对象Statement，执行SQL的对象
+            Statement statement = connection.createStatement();
+
+            sqlmd2 = md2 + num + wherez + Sno;//根据输入修改数据
+            statement.executeUpdate(sqlmd2);
+
+
+            statement.close();
+            statement.close();
+            connection.close();
+
+        }catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+
+    //将数据库数据同步到本地堆栈
+    public int trandata(int choose)
+    {
+        String str = "SELECT num FROM goodsinfo where Sno=";
+        String tdata;
+        int number;
+        ResultSet resultSet = null;
+        Statement statement = null;
+        Connection connection = null;
+        try {
+            connection = Database.getConnection();
+            //执行SQL对象Statement，执行SQL的对象
+            statement = connection.createStatement();
+            //拼接查询语句
+            tdata = str+choose;
+            resultSet = statement.executeQuery(tdata);
+            if(resultSet.next()) {
+                number = resultSet.getInt("num");
+                System.out.println("------"+number+"------");
+            }else{
+                number=0;
+            }
+
+            //System.out.println("现还有以下商品供您选择：");
+//            while(resultSet.next()){
+//                System.out.print(resultSet.getInt("Sno")+"、"+resultSet.getString("name")+"\t价格："+resultSet.getDouble("price")+"\t剩余："+resultSet.getInt("num")+"\n");
+//            }
+            //System.out.println("5、退出购物");
+
+            return number;
+        //异常处理
+        }catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+            return 0;
+        //释放资源
+        }
+        finally {
+            if(resultSet != null){
+                try{
+                    resultSet.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+            // 关闭 statement
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            // 关闭 connection
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
 }
