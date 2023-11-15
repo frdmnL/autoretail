@@ -17,7 +17,7 @@ public class Database {
     //向数据库中添加商品信息
     public void adddata(String name,float price,int num)
     {
-        String addinfo = "INSERT INTO goodsinfo values('"+name+"','"+price+"','"+num+"')";
+        String addinfo = "INSERT INTO goodsinfo(name,price,num)values('"+name+"','"+price+"','"+num+"')";
         //连接成功，数据库对象 Connection
         try {
             Connection connection = Database.getConnection();
@@ -38,7 +38,6 @@ public class Database {
     public void printinfo()
     {
         String ginfo = "SELECT *FROM goodsinfo;";
-        int index = 1;
         try {
             Connection connection = Database.getConnection();
             //执行SQL对象Statement，执行SQL的对象
@@ -47,8 +46,7 @@ public class Database {
             ResultSet resultSet = statement.executeQuery(ginfo);
             //System.out.println("现还有以下商品供您选择：");
             while(resultSet.next()){
-                System.out.print(index+"、"+resultSet.getString("name")+"\t价格："+resultSet.getDouble("price")+"\t剩余："+resultSet.getInt("num")+"\n");
-                index++;
+                System.out.print(resultSet.getInt("Sno")+"、"+resultSet.getString("name")+"\t价格："+resultSet.getDouble("price")+"\t剩余："+resultSet.getInt("num")+"\n");
             }
             //System.out.println("5、退出购物");
             resultSet.close();
