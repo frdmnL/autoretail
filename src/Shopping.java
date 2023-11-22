@@ -4,6 +4,7 @@ import java.util.Scanner;
 class shopping
 {
     Database database = new Database();
+    SocketClient client = new SocketClient();
     int password = 111222;
     //创建商品
         goods beer = new goods("啤酒",3,30);
@@ -30,6 +31,10 @@ class shopping
 
         //修改商品数量
         dnumber = dnumber-num;
+        if(dnumber <= 5)
+        {
+            client.sendinfo(choose,dnumber);
+        }
         //写回数据库
         database.updateinfonum(choose,dnumber);
         //写回数据库

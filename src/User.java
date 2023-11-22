@@ -6,7 +6,6 @@ public class User
     {
         Scanner sc = new Scanner(System.in);
         shopping shopping = new shopping();//创建对象
-        //Database database = new Database();
 
         while(true) {
             System.out.println("选择模式：1、购物\t2、管理");//系统提示语
@@ -43,8 +42,8 @@ public class User
                         System.out.println("欢迎您下次光临！");
                         break;
                     }
-//                    System.out.println("请输入购买数量");
-//                    num = sc.nextInt();//保存客户购买数量
+                    System.out.println("请输入购买数量");
+                    num = sc.nextInt();//保存客户购买数量
                 }
             }
             else//选择“2”管理模式
@@ -53,6 +52,4 @@ public class User
             }
         }
     }
-
-
 }
