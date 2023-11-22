@@ -19,7 +19,9 @@ class shopping
         database.printinfo();
         System.out.println("11、退出购物");
     }
-    //购买函数shou
+
+//购买函数shou
+
     public void shop(int choose,int num)
     {
         int dnumber=0;
@@ -31,7 +33,7 @@ class shopping
         //写回数据库
         database.updateinfonum(choose,dnumber);
         //写回数据库
-
+        success();
 
     }
     //如果购买成功打印函数内容
@@ -75,39 +77,51 @@ class shopping
                 int num = scanner.nextInt();
                 scanner.nextLine();
                 database.updateinfoall(input,price,num);
-//                switch (input)
-//                {
-//                    case "啤酒":
-//                        //System.out.println("---");
-//                        beer.setNumber(num);
-//                        beer.setPrice(price);
-//                        break;
-//                    case "汇源果汁":
-//                        juice.setNumber(num);
-//                        juice.setPrice(price);
-//                        break;
-//                    case "农夫山泉":
-//                        water.setNumber(num);
-//                        water.setPrice(price);
-//                        break;
-//                    case "雀巢咖啡":
-//                        coffee.setNumber(num);
-//                        coffee.setPrice(price);
-//                        break;
-//                }
+            }
+        }
+    }
+
+    public void addGoods()
+    {
+        String str;
+        boolean continueInput = true;
+        Scanner scanner = new Scanner(System.in);
+
+        while (continueInput) {
+            System.out.print("请输入商品名（输入exit退出）:");
+            str = scanner.nextLine();
+
+            if(str.equalsIgnoreCase("exit")){
+                continueInput = false;
+            }else {
+                //获取价格输入
+                System.out.print("请输入商品价格：");
+                float price = scanner.nextFloat();
+                scanner.nextLine();
+                System.out.print("请输入商品数量：");
+                int num = scanner.nextInt();
+                scanner.nextLine();
+                database.adddata(str,price,num);
             }
         }
     }
 
     public void entry()
     {
-        int enpassword=0;
+        int enpassword=0,mod=0;
         System.out.println("请输入密码：");
         Scanner enpw = new Scanner(System.in);
         enpassword = enpw.nextInt();
 
-        if(enpassword == password)
-            upGoods();
+        if(enpassword == password) {
+            System.out.println("请选择模式:\n1.新增商品\t2.修改商品信息");
+            mod = enpw.nextInt();
+            if(mod == 1){
+                addGoods();
+            }else if(mod == 2){
+                upGoods();
+            }
+        }
 
     }
 

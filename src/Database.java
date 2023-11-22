@@ -127,16 +127,10 @@ public class Database {
             resultSet = statement.executeQuery(tdata);
             if(resultSet.next()) {
                 number = resultSet.getInt("num");
-                System.out.println("------"+number+"------");
+                //System.out.println("------"+number+"------");
             }else{
                 number=0;
             }
-
-            //System.out.println("现还有以下商品供您选择：");
-//            while(resultSet.next()){
-//                System.out.print(resultSet.getInt("Sno")+"、"+resultSet.getString("name")+"\t价格："+resultSet.getDouble("price")+"\t剩余："+resultSet.getInt("num")+"\n");
-//            }
-            //System.out.println("5、退出购物");
 
             return number;
         //异常处理
