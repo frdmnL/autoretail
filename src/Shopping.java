@@ -122,7 +122,7 @@ class shopping
         }
     }
 
-    //管理模式
+    //管理模式,对用户名和密码进行验证
     public void entry()
     {
         int enpassword=0,mod=0;
@@ -131,10 +131,12 @@ class shopping
         System.out.println("请输入用户名：");
         Scanner en = new Scanner(System.in);
         enusr = en.nextLine();
+        //匹配用户名
         if(enusr.equals(user1))
         {
             System.out.println("请输入密码：");
             enpassword = en.nextInt();
+            //匹配密码
             if(enpassword == password) {
                 System.out.println("请选择模式:\n1.新增商品\t2.修改商品信息");
                 mod = en.nextInt();
@@ -145,14 +147,5 @@ class shopping
                 }
             }
         }
-
-//        System.out.println("请输入密码：");
-//        Scanner en = new Scanner(System.in);
-//        enpassword = enpw.nextInt();
-
-
-
     }
-
-
 }

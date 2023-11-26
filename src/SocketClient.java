@@ -27,6 +27,7 @@ public class SocketClient {
         }
 
         try{
+            //发送语句
             os.write("商品"+Sno+"数量不足！请尽快补货");
             os.newLine();
             os.flush();

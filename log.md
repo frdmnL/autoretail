@@ -41,3 +41,5 @@ https://github.com/frdmnL/autoretail.git
 添加函数注释
 
 在管理模式中新增管理员账户登录功能
+
+弃用goods类，商品信息由数据库管理

@@ -22,10 +22,11 @@ public class SocketServer {
             socketOfServer = listener.accept();
             System.out.println("accept client");
             is = new BufferedReader(new InputStreamReader(socketOfServer.getInputStream()));
-            os = new BufferedWriter(new OutputStreamWriter(socketOfServer.getOutputStream()));
+            //os = new BufferedWriter(new OutputStreamWriter(socketOfServer.getOutputStream()));
 
             while (true){
                 while((line = is.readLine()) != null){
+                    //将监听到的内容打印
                     System.out.println(line);
                 }
                 break;

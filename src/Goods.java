@@ -1,3 +1,4 @@
+//此类已弃用2023.11.26
 class goods
 {
     String goodsname;   //商品名称

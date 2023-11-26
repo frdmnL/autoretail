@@ -23,7 +23,7 @@ public class Database {
             Connection connection = Database.getConnection();
         //执行SQL对象Statement，执行SQL的对象
             Statement statement = connection.createStatement();
-
+        //SQL语句
             statement.executeUpdate(addinfo);
 
             statement.close();
@@ -44,11 +44,10 @@ public class Database {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(ginfo);
-            //System.out.println("现还有以下商品供您选择：");
+
             while(resultSet.next()){
                 System.out.print(resultSet.getInt("Sno")+"、"+resultSet.getString("name")+"\t价格："+resultSet.getDouble("price")+"\t剩余："+resultSet.getInt("num")+"\n");
             }
-            //System.out.println("5、退出购物");
             resultSet.close();
             statement.close();
             statement.close();
@@ -59,7 +58,12 @@ public class Database {
         }
     }
 
-
+    /***
+     * Description： 修改单个商品的所有信息
+     * @param Sno 商品编号
+     * @param price 商品价格
+     * @param num 商品剩余数量
+     */
     public void updateinfoall(int Sno,float price,int num)
     {
         String md1 = "update goodsinfo set price=";
@@ -71,7 +75,7 @@ public class Database {
             Connection connection = Database.getConnection();
             //执行SQL对象Statement，执行SQL的对象
             Statement statement = connection.createStatement();
-
+        //SQL语句
             sqlmd1 = md1 + price + upnum + num + wherez + Sno;//根据输入修改数据
             statement.executeUpdate(sqlmd1);
 
@@ -84,13 +88,17 @@ public class Database {
         }
     }
 
+    /***
+     * Description：更新数据库中商品剩余数量，用于购买操作
+     * @param Sno 商品编号
+     * @param num 要更新的数量
+     */
     public void updateinfonum(int Sno,int num)
     {
 
         String md2 = "update goodsinfo set num=";
         String wherez = " where Sno=";
         String sqlmd2;
-        int index = 1;
         try {
             Connection connection = Database.getConnection();
             //执行SQL对象Statement，执行SQL的对象
@@ -109,7 +117,11 @@ public class Database {
         }
     }
 
-    //将数据库数据同步到本地堆栈
+    /***
+     * Description:读取数据库数据同步到本地
+     * @param choose 商品编号
+     * @return
+     */
     public int trandata(int choose)
     {
         String str = "SELECT num FROM goodsinfo where Sno=";
@@ -127,11 +139,9 @@ public class Database {
             resultSet = statement.executeQuery(tdata);
             if(resultSet.next()) {
                 number = resultSet.getInt("num");
-                //System.out.println("------"+number+"------");
             }else{
                 number=0;
             }
-
             return number;
         //异常处理
         }catch (SQLException | ClassNotFoundException e){
