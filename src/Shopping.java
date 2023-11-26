@@ -6,7 +6,9 @@ class shopping
     Database database = new Database();
     SocketClient client = new SocketClient();
     int password = 111222;
+    String user1 = "admin";
     //创建商品
+    //以下数据已弃用
         goods beer = new goods("啤酒",3,30);
         goods juice = new goods("汇源橙汁",3,20);
         goods water = new goods("农夫山泉",2,30);
@@ -21,7 +23,11 @@ class shopping
         System.out.println("11、退出购物");
     }
 
-//购买函数shou
+    /***
+     * Description: 购买函数
+     * @param choose 商品编号
+     * @param num 购买数量
+     */
 
     public void shop(int choose,int num)
     {
@@ -33,11 +39,12 @@ class shopping
         dnumber = dnumber-num;
         if(dnumber <= 5)
         {
+            //货物数量低于5个，通过socket发送补货信息
             client.sendinfo(choose,dnumber);
         }
         //写回数据库
         database.updateinfonum(choose,dnumber);
-        //写回数据库
+        //打印购买成功提示语
         success();
 
     }
@@ -61,6 +68,9 @@ class shopping
         }
     }
 
+    /***
+     * Description: 修改商品数量以及价格
+     */
     public void upGoods()
     {
         int input;
@@ -81,11 +91,12 @@ class shopping
                 System.out.print("请输入商品数量：");
                 int num = scanner.nextInt();
                 scanner.nextLine();
+                //将新的商品信息写回数据库
                 database.updateinfoall(input,price,num);
             }
         }
     }
-
+    //添加商品函数
     public void addGoods()
     {
         String str;
@@ -111,22 +122,35 @@ class shopping
         }
     }
 
+    //管理模式
     public void entry()
     {
         int enpassword=0,mod=0;
-        System.out.println("请输入密码：");
-        Scanner enpw = new Scanner(System.in);
-        enpassword = enpw.nextInt();
+        String enusr;
 
-        if(enpassword == password) {
-            System.out.println("请选择模式:\n1.新增商品\t2.修改商品信息");
-            mod = enpw.nextInt();
-            if(mod == 1){
-                addGoods();
-            }else if(mod == 2){
-                upGoods();
+        System.out.println("请输入用户名：");
+        Scanner en = new Scanner(System.in);
+        enusr = en.nextLine();
+        if(enusr.equals(user1))
+        {
+            System.out.println("请输入密码：");
+            enpassword = en.nextInt();
+            if(enpassword == password) {
+                System.out.println("请选择模式:\n1.新增商品\t2.修改商品信息");
+                mod = en.nextInt();
+                if(mod == 1){
+                    addGoods();
+                }else if(mod == 2){
+                    upGoods();
+                }
             }
         }
+
+//        System.out.println("请输入密码：");
+//        Scanner en = new Scanner(System.in);
+//        enpassword = enpw.nextInt();
+
+
 
     }
 
