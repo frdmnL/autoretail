@@ -34,8 +34,6 @@ public class SocketClient {
             os.write("剩余数量"+':'+num);
             os.newLine();
             os.flush();
-
-
             os.close();
             is.close();
             socketOfClient.close();

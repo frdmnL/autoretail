@@ -18,8 +18,9 @@ public class Database {
     public void adddata(String name,float price,int num)
     {
         String addinfo = "INSERT INTO goodsinfo(name,price,num)values('"+name+"','"+price+"','"+num+"')";
-        //连接成功，数据库对象 Connection
+
         try {
+        //连接成功，数据库对象 Connection
             Connection connection = Database.getConnection();
         //执行SQL对象Statement，执行SQL的对象
             Statement statement = connection.createStatement();

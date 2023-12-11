@@ -61,6 +61,7 @@ class shopping
             System.out.println("购买成功！");
         }else if(select==2){
             System.out.println("请投入硬币");
+            System.out.println("购买成功！");
         }
         else
         {
